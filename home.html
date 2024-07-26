@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Book E-commerce</h1>
+        <nav>
+            <a href="logout.html">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Available Books</h2>
+        <div id="book-list"></div>
+        <button id="add-book-button">Add New Book</button>
+    </main>
+    <script>
+        document.getElementById('add-book-button').addEventListener('click', function() {
+            window.location.href = 'add-book.html';
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

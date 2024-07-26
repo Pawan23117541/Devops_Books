@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Book</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Add New Book</h1>
+        <nav>
+            <a href="home.html">Home</a>
+        </nav>
+    </header>
+    <main>
+        <form id="add-book-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" required>
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <label for="about">About:</label>
+            <textarea id="about" name="about" required></textarea>
+            <button type="submit">Add Book</button>
+        </form>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
