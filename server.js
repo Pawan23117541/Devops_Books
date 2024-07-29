@@ -8,7 +8,7 @@ const fs = require('fs');
 const app = express();
 const db = new sqlite3.Database('./bookstore.db');
 
-// Set up multer for file uploads
+// set up for multer for file uploads - 21/07/2024 - pavan
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, 'images/');
@@ -23,16 +23,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/')));
 
-// Create tables and insert data
+// Creating tables and inserting the data - 21/07/2024 - pavan
 db.serialize(() => {
     db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT,username TEXT NOT NULL UNIQUE, password TEXT NOT NULL)");
-    //db.run("INSERT INTO users (username, password) VALUES ('admin', 'admin123')");
 
     db.run("CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, price REAL NOT NULL, image TEXT NOT NULL, about TEXT NOT NULL)");
-    //db.run("INSERT INTO books (title, price, image, about) VALUES ('Sample Book', 9.99, 'images/sample.jpg', 'This is a sample book.')");
 });
 
-// Signup endpoint
+// Signup for endpoint - 21/07/2024 - pavan
 app.post('/signup', (req, res) => {
     const { username, password } = req.body;
     db.run("INSERT INTO users (username, password) VALUES (?, ?)", [username, password], function(err) {
@@ -44,7 +42,7 @@ app.post('/signup', (req, res) => {
     });
 });
 
-// Login endpoint
+// Login for endpoint - 21/07/2024 - pavan
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     db.get('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, row) => {
@@ -58,9 +56,9 @@ app.post('/login', (req, res) => {
     });
 });
 
-// CRUD endpoints for books
+// CRUD operations endpoints for books - 21/07/2024 - pavan
 
-// Create (Add) a new book
+// Creating (Add) a new book 
 app.post('/books', upload.single('image'), (req, res) => {
     const { title, price, about } = req.body;
     const image = req.file ? req.file.path : '';
@@ -73,7 +71,7 @@ app.post('/books', upload.single('image'), (req, res) => {
     });
 });
 
-// Read (Get) all books
+// Read (Get) all books - 21/07/2024 - pavan
 app.get('/books', (req, res) => {
     db.all("SELECT * FROM books", (err, rows) => {
         if (err) {
@@ -84,7 +82,7 @@ app.get('/books', (req, res) => {
     });
 });
 
-// Update an existing book
+// Updating an existing book - 21/07/2024 - pavan
 app.put('/books/:id', upload.single('image'), (req, res) => {
     const { id } = req.params;
     const { title, price, about } = req.body;
@@ -98,7 +96,7 @@ app.put('/books/:id', upload.single('image'), (req, res) => {
     });
 });
 
-// Delete a book
+// Deleting a book - 21/07/2024 - pavan
 app.delete('/books/:id', (req, res) => {
     const { id } = req.params;
     db.run("DELETE FROM books WHERE id = ?", id, function(err) {
