@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const bookList = document.getElementById("book-list");
 
-    // fetch and display books - Pavan 21/07/2024
+    // fetching and displaying books - Pavan 21/07/2024
     function fetchBooks() {
         fetch('/books')
             .then(response => response.json())
